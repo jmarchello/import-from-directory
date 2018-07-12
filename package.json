@@ -1,0 +1,21 @@
+{
+  "name": "import-from-directory",
+  "version": "1.0.0",
+  "description": "A fault tolerant way to import all JavaScript files from a directory.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/jmarchello/import-from-directory"
+  },
+  "keywords": [
+    "import",
+    "require",
+    "directory",
+    "node"
+  ],
+  "author": "Josh Marchello",
+  "license": "MIT"
+}
