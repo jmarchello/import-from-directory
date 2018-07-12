@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-exports.importFromDirectory = (directoryPath, maxPasses=4) => {
+const importFromDirectory = (directoryPath, maxPasses=4) => {
     const files = fs.readdirSync(directoryPath).filter(file => file.endsWith('.js'));
     const result = {};
     let passes = 0;
@@ -26,3 +26,4 @@ exports.importFromDirectory = (directoryPath, maxPasses=4) => {
     return result;
 };
 
+module.exports = importFromDirectory;
