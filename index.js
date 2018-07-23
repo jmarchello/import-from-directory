@@ -4,7 +4,7 @@ const importFromDirectory = (directoryPath, maxPasses=4) => {
     const files = fs.readdirSync(directoryPath).filter(file => file.endsWith('.js'));
     const result = {};
     let passes = 0;
-    let error;
+    let errors = [];
 
     while (files.length > 0 && passes <= maxPasses) {
         files.map(file => {
@@ -12,15 +12,14 @@ const importFromDirectory = (directoryPath, maxPasses=4) => {
                 result[file.split('.')[0]] = require(`${directoryPath}/${file}`);
                 files.splice(files.indexOf(file), 1);
             } catch (err) {
-                error = err;
+                errors.push(err);
             }
         });
         passes++;
     }
 
     if (passes >= maxPasses && files.length > 0) {
-        console.log("Maximum import attempts reached, throwing last error");
-        throw error;
+        throw new Error(`Maximum import attempts reached, the following errors occured on the last attempt: ${errors}`);
     }
 
     return result;
