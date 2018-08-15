@@ -1,10 +1,13 @@
 const fs = require('fs');
 
-const importFromDirectory = (directoryPath, maxPasses=4, verbose=false) => {
+const importFromDirectory = (directoryPath, ignorePattern, maxPasses=4, verbose=false) => {
     let files = [];
 
     try {
-        files = fs.readdirSync(directoryPath).filter(file => file.endsWith('.js'));
+        files = fs.readdirSync(directoryPath).filter(file => {
+            return file.endsWith('.js')
+                && (!ignorePattern || !file.match(ignorePattern))
+        });
     } catch (err) {
         verbose && console.log(err);
         return files;
